@@ -16,9 +16,9 @@ DOCKERFILE := Dockerfile
 CONTEXT_DIR := sonarqube-exporter
 
 # Env Variables for sonar
-SONAR_URL := http://sonarqube.example.com
-SONAR_USER := your_user
-SONAR_PASSWORD := your_password
+SONAR_URL := http://localhost:8080
+SONAR_USER := admin
+SONAR_PASSWORD := admin1
 
 # Helm release name
 HELM_RELEASE_NAME := sonarqube-release
@@ -44,7 +44,7 @@ run-docker:
 	docker run -p $(DOCKER_EXPOSED_PORT):$(DOCKER_EXPOSED_PORT) \
   	  -e SONAR_URL=$(SONAR_URL) \
  	  -e SONAR_USER=$(SONAR_USER) \
-  	  -e SONAR_PASSWORD=<$(SONAR_PASSWORD) \
+  	  -e SONAR_PASSWORD=$(SONAR_PASSWORD) \
   	  --rm $(DOCKER_IMAGE_NAME)
 
 # Commands for stopping and removing the running Docker container

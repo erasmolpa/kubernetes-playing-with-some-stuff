@@ -63,6 +63,9 @@ delete-kube-prometheus:
 forward-kube-prometheus:
 	$(PORT_FORWARD_KUBE_PROMETHEUS)
 
+forward-grafana: 
+	kubectl port-forward svc/kube-prometheus-grafana 8088:80 -n monitoring
+
 # "help" target to display a list of commands and descriptions
 help:
 	@echo "Usage: make <command>"
