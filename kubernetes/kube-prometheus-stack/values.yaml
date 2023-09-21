@@ -3245,7 +3245,7 @@ prometheus:
     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
-    additionalScrapeConfigs: []
+    #additionalScrapeConfigs: []
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
@@ -3276,17 +3276,34 @@ prometheus:
     #
     ## If scrape config contains a repetitive section, you may want to use a template.
     ## In the following example, you can see how to define `gce_sd_configs` for multiple zones
-    # additionalScrapeConfigs: |
-    #  - job_name: "node-exporter"
-    #    gce_sd_configs:
-    #    {{range $zone := .Values.gcp_zones}}
-    #    - project: "project1"
-    #      zone: "{{$zone}}"
-    #      port: 9100
-    #    {{end}}
-    #    relabel_configs:
-    #    ...
+    additionalScrapeConfigs: |
+      - job_name: 'sonarqube_monitoring_metrics'
+        metrics_path: /api/monitoring/metrics
+        static_configs:
+          - targets:
+            - sonarqube-sonarqube.sonarqube.svc.cluster.local:9000
+        basic_auth:
+          username: 'admin'
+          password: 'admin1'
+          
+    # Metrics bellow are required for business prupose but are not in prometheus format. 
+    #  - job_name: 'sonarqube_metrics'
+    #    metrics_path: /api/metrics/search
+    #    static_configs:
+    #      - targets:
+    #        - sonarqube-sonarqube.sonarqube.svc.cluster.local:9000
+    #    basic_auth:
+    #      username: 'admin'
+    #      password: 'admin1'
 
+    #  - job_name: 'sonarqube_qualifiers'
+    #    metrics_path: /api/qualityprofiles/search
+    #    static_configs:
+    #      - targets:
+    #        - sonarqube-sonarqube.sonarqube.svc.cluster.local:9000
+    #    basic_auth:
+    #      username: 'admin'
+    #      password: 'admin1'
 
     ## If additional scrape configurations are already deployed in a single secret file you can use this section.
     ## Expected values are the secret name and key
