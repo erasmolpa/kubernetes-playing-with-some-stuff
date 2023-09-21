@@ -1,4 +1,11 @@
-# Define los nombres de los releases de Helm y los puertos locales
+AKS_CLUSTER_NAME := my-aks-cluster
+
+AKS_RESOURCE_GROUP := my-aks-rg
+
+AKS_CLUSTER_CONTEXT := $(AKS_CLUSTER_NAME)_$(AKS_RESOURCE_GROUP)
+
+AZ_AUTH := az aks get-credentials --name $(AKS_CLUSTER_NAME) --resource-group $(AKS_RESOURCE_GROUP) --overwrite-existing
+
 SONARQUBE_RELEASE := sonarqube
 SONAR_NAMESPACE := sonarqube
 SONARQUBE_LOCAL_PORT := 9000
@@ -38,7 +45,9 @@ PORT_FORWARD_KUBE_PROMETHEUS := kubectl port-forward --kubeconfig $(KUBECONFIG) 
     $$(kubectl get pods --kubeconfig $(KUBECONFIG) -l app.kubernetes.io/name=$(KUBE_PROMETHEUS_RELEASE) -o jsonpath='{.items[0].metadata.name}') \
     $(KUBE_PROMETHEUS_LOCAL_PORT):$(KUBE_PROMETHEUS_LOCAL_PORT) --namespace $(KUBE_PROMETHEUS_NAMESPACE)
 
-
+aks-auth:
+	$(AZ_AUTH)
+	
 install-sonarqube:
 	
 	$(CREATE_NAMESPACE_SONARQUBE)
