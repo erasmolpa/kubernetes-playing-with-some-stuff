@@ -24,4 +24,4 @@ data:
 EOF
 
 # Aplicar el secreto
-kubectl apply -f sonar-secret.yaml
+kubectl apply -f sonar-secret.yaml -n monitoring
