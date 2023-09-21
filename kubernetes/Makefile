@@ -38,7 +38,7 @@ DELETE_KUBE_PROMETHEUS := helm delete $(KUBE_PROMETHEUS_RELEASE) --kubeconfig $(
 
 # Commands for port forwarding
 PORT_FORWARD_SONARQUBE := kubectl port-forward --kubeconfig $(KUBECONFIG) \
-    $$(kubectl get pods --kubeconfig $(KUBECONFIG) -l app.kubernetes.io/name=$(SONARQUBE_RELEASE) -o jsonpath='{.items[0].metadata.name}') \
+    $$(kubectl get pods --kubeconfig $(KUBECONFIG) -l app.kubernetes.io/app=$(SONARQUBE_RELEASE) -o jsonpath='{.items[0].metadata.name}') \
     $(SONARQUBE_LOCAL_PORT):$(SONARQUBE_LOCAL_PORT) --namespace $(SONAR_NAMESPACE)
 
 PORT_FORWARD_KUBE_PROMETHEUS := kubectl port-forward --kubeconfig $(KUBECONFIG) \

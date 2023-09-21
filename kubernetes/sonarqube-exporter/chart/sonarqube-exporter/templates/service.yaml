@@ -12,4 +12,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "sonarqube-exporter.selectorLabels" . | nindent 4 }}
+    app: {{ template "sonarqube-exporter.name" . }}
+    release: {{ .Release.Name }}
