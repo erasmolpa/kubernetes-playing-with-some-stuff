@@ -32,6 +32,19 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          env:
+            - name: SONAR_URL
+              value: {{ .Values.sonarqube.sonarUrl }}
+            - name: SONAR_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sonarqube.sonarUserSecretName }}
+                  key: SONAR_USER
+            - name: SONAR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sonarqube.sonarUserSecretName }}
+                  key: SONAR_PASSWORD
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

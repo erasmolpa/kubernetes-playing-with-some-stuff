@@ -22,7 +22,7 @@ SONAR_PASSWORD := admin1
 
 # Helm release name
 HELM_RELEASE_NAME := sonarqube-release
-
+SONAR_EXPORTER_NAMESPACE := monitoring
 # Local port for Helm port forwarding
 HELM_LOCAL_PORT := 9000
 
@@ -59,6 +59,7 @@ clean-docker:
 install-helm:
 	helm install $(HELM_RELEASE_NAME) $(HELM_CHART_DIR) \
 		--kubeconfig $(KUBECONFIG) \
+		--namespace $(SONAR_EXPORTER_NAMESPACE) \
 		-f $(HELM_CHART_DIR)/values.yaml \
 		--wait
 

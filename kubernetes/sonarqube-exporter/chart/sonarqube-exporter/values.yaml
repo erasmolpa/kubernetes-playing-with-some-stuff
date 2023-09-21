@@ -5,10 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: erasmolpa/sonarqube-exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
+
+sonarqube:
+  sonarUrl: "http://localhost:8080"
+  sonarUserSecretName: "sonar-secret"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,7 +42,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 9119
 
 ingress:
   enabled: false

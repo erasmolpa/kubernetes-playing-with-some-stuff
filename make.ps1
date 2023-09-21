@@ -19,9 +19,9 @@ $INSTALL_KUBE_PROMETHEUS = "helm install $KUBE_PROMETHEUS_RELEASE $KUBE_PROMETHE
 $DELETE_SONARQUBE = "helm delete $SONARQUBE_RELEASE --kubeconfig $KUBECONFIG --namespace $SONAR_NAMESPACE"
 $DELETE_KUBE_PROMETHEUS = "helm delete $KUBE_PROMETHEUS_RELEASE --kubeconfig $KUBECONFIG --namespace $KUBE_PROMETHEUS_NAMESPACE"
 
-# Commands for port forwarding
-$PORT_FORWARD_SONARQUBE = "kubectl port-forward --kubeconfig $KUBECONFIG $(kubectl get pods --kubeconfig $KUBECONFIG -l app.kubernetes.io/name=$SONARQUBE_RELEASE -o jsonpath='{.items[0].metadata.name}') $SONARQUBE_LOCAL_PORT:$SONARQUBE_LOCAL_PORT --namespace $SONAR_NAMESPACE"
-$PORT_FORWARD_KUBE_PROMETHEUS = "kubectl port-forward --kubeconfig $KUBECONFIG $(kubectl get pods --kubeconfig $KUBECONFIG -l app.kubernetes.io/name=$KUBE_PROMETHEUS_RELEASE -o jsonpath='{.items[0].metadata.name}') $KUBE_PROMETHEUS_LOCAL_PORT:$KUBE_PROMETHEUS_LOCAL_PORT --namespace $KUBE_PROMETHEUS_NAMESPACE"
+# Commands for port forwarding#$PORT_FORWARD_SONARQUBE = "kubectl port-forward --kubeconfig $KUBECONFIG $(kubectl get pods --kubeconfig $KUBECONFIG -l app.kubernetes.io/name=$SONARQUBE_RELEASE -o jsonpath='{.items[0].metadata.name}') $SONARQUBE_LOCAL_PORT:$SONARQUBE_LOCAL_PORT --namespace $SONAR_NAMESPACE"
+#$PORT_FORWARD_SONARQUBE = "kubectl port-forward --kubeconfig $KUBECONFIG $($(kubectl get pods --kubeconfig $KUBECONFIG -l app.kubernetes.io/name=$SONARQUBE_RELEASE -o jsonpath='{.items[0].metadata.name}')) $SONARQUBE_LOCAL_PORT:$SONARQUBE_LOCAL_PORT --namespace $SONAR_NAMESPACE"
+#$PORT_FORWARD_KUBE_PROMETHEUS = "kubectl port-forward --kubeconfig $KUBECONFIG $($(kubectl get pods --kubeconfig $KUBECONFIG -l app.kubernetes.io/name=$KUBE_PROMETHEUS_RELEASE -o jsonpath='{.items[0].metadata.name}')) $KUBE_PROMETHEUS_LOCAL_PORT:$KUBE_PROMETHEUS_LOCAL_PORT --namespace $KUBE_PROMETHEUS_NAMESPACE"
 
 # "help" function to display a list of commands and descriptions
 function Show-Help {
